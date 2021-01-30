@@ -1,6 +1,5 @@
 package com.hyecheon.backend.core.domain.entity
 
-import java.sql.*
 import javax.persistence.*
 
 /**
@@ -27,19 +26,12 @@ data class User(
 	@Column(nullable = false)
 	var password: String,
 
-	var salt: String? = null,
-
-	var about: String? = null,
-
 	@OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	var roles: MutableSet<UserRole> = mutableSetOf(),
 
 	@Lob
-	val photo: String? = null,
-
-	var resetPasswordLink: String? = null
-
+	val photo: String? = null
 ) : BaseEntity() {
 	fun roles(): List<String> {
 		return roles.map { userRoleEntity -> userRoleEntity.role.name }

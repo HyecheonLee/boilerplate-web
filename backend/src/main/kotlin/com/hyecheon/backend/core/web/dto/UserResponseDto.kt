@@ -21,7 +21,7 @@ data class UserResponseDto(
 		fun from(user: User) = run {
 			UserResponseDto(
 				id = user.id!!, username = user.username, name = user.name, email = user.email,
-				profile = user.profile, about = user.about, roles = user.roles(), photo = user.photo
+				profile = user.profile, roles = user.roles(), photo = user.photo
 			)
 		}
 	}

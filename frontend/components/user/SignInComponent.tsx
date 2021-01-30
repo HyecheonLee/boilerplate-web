@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { isAdmin, signIn } from "../../actions/auth";
+import React, { useEffect, useState } from 'react';
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from "../../redux/reducer";
+import { singInAction } from "../../redux/reducer/user";
+import { isAdmin } from "../../actions/auth";
 
 const SignInComponent = () => {
   const [email, setEmail] = useState("");
@@ -8,28 +11,44 @@ const SignInComponent = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter()
+  const user = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    if (user.id !== -1) {
+      if (isAdmin()) {
+        router.push("/admin")
+      } else {
+        router.push("/user")
+      }
+    }
+  }, [user])
   
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await signIn({email, password})
-      .then(data => {
-        setLoading(false);
-        if (data.error) {
-          setError(data.error);
-        } else {
-          if (isAdmin()) {
-            router.push("/admin")
-          } else {
-            router.push("/user")
-          }
-        }
-      })
-      .catch(data => {
-        setLoading(false);
-        setError(data.error);
-      })
+    dispatch(singInAction(email, password))
+    /*    await signIn({email, password})
+          .then(data => {
+            setLoading(false);
+            if (data.error) {
+              setError(data.error);
+            } else {
+              
+              if (isAdmin()) {
+                router.push("/admin")
+              } else {
+                router.push("/user")
+              }
+            }
+          })
+          .catch(data => {
+            setLoading(false);
+            setError(data.error);
+          })*/
   }
+  
+  
   const handleChange = func => (e) => {
     func(e.target.value)
   }

@@ -14,15 +14,14 @@ data class LoggedUserDto(
 	val name: String? = null,
 	val email: String,
 	val profile: String? = null,
-	val about: String? = null,
 	var roles: List<String> = listOf(),
 	val photo: String? = null,
 ) {
 	companion object {
-		fun from(userEntity: UserEntity) = run {
+		fun from(user: User) = run {
 			LoggedUserDto(
-				id = userEntity.id!!, username = userEntity.username, name = userEntity.name, email = userEntity.email,
-				profile = userEntity.profile, about = userEntity.about, roles = userEntity.roles(), photo = blobToBase64(userEntity.photo)
+				id = user.id!!, username = user.username, name = user.name, email = user.email,
+				profile = user.profile, roles = user.roles(), photo = user.photo
 			)
 		}
 	}

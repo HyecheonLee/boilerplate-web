@@ -2,9 +2,9 @@ import '../styles/global.css'
 import React from "react";
 import Head from 'next/head'
 import Layout from "../components/Layout";
+import {wrapper} from '../redux/store';
 
-
-export default function App({Component, pageProps}) {
+function App({Component, pageProps}) {
 	return (
 		<>
 			<Head>
@@ -23,3 +23,5 @@ export default function App({Component, pageProps}) {
 		</>
 	)
 }
+
+export default wrapper.withRedux(App)
