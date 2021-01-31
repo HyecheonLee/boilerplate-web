@@ -1,9 +1,0 @@
-spring:
-#  data:
-#    mongodb:
-#      uri: mongodb+srv://hyecheon:hclee@cluster0.ip1rn.mongodb.net/Cluster0?retryWrites=true&w=majority
-  datasource:
-    url: jdbc:mariadb://localhost:3306/test?useUnicode=yes&characterEncoding=utf8mb4
-    username: root
-    password: gpcjs
-    driver-class-name: org.mariadb.jdbc.Driver
