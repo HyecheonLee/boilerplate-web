@@ -27,25 +27,7 @@ const SignInComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    dispatch(singInAction(email, password))
-    /*    await signIn({email, password})
-          .then(data => {
-            setLoading(false);
-            if (data.error) {
-              setError(data.error);
-            } else {
-              
-              if (isAdmin()) {
-                router.push("/admin")
-              } else {
-                router.push("/user")
-              }
-            }
-          })
-          .catch(data => {
-            setLoading(false);
-            setError(data.error);
-          })*/
+    await dispatch(singInAction(email, password));
   }
   
   

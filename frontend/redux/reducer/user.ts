@@ -1,6 +1,7 @@
 import { ActionProps } from "../../types/state";
 import axios from "axios";
 import { API } from "../../config";
+import { showPopupAction } from "./popup";
 
 // actions
 export const SIGN_IN = 'user/SIGN_IN';
@@ -19,6 +20,11 @@ export const singInAction =
             type: SIGN_IN,
             user: response.data
           });
+          dispatch(showPopupAction("로그인에 성공했습니다.", "", "success"))
+        })
+        .catch(e => {
+          e.response.data
+          dispatch(showPopupAction("로그인을 실패했습니다.", e.response.data.message, "danger"))
         });
 
 
